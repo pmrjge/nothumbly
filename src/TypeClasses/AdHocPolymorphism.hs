@@ -136,3 +136,6 @@ module TypeClasses.AdHocPolymorphism where
             in (USD a', USD b') 
         toInteger (USD a) = a -}
                             
+    newtype USDC = USDC {getMillis:: Integer} deriving (Eq, Ord, Show, Enum, Real, Integral)
+
+    newtype MyMaybe a = MyMaybe (Maybe a) deriving Show
