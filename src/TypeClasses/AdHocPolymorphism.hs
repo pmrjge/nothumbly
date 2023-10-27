@@ -96,4 +96,43 @@ module TypeClasses.AdHocPolymorphism where
         empty = []
         pick = (<>)
 
-    
+    data Customer = Customer {name:: String, mail:: String, email:: String}
+
+    instance Eq Customer where
+        (==) (Customer name mail email) (Customer name' mail' email') = name == name' && mail == mail' && email == email'
+
+    instance Ord Customer where
+        compare c0 c1 = compare c0.name c1.name <> compare c0.mail c1.mail <> compare c0.email c1.email
+
+    instance Show Custimer where
+        show (Customer name mail email) = "Customer {name = " <> show name <> ", " <> "mail=" <> show mail <> ", " <> "email=" <> show email <> "}"
+
+    data CustomerD = CustomerD {name:: String, mail:: String, email:: String} deriving (Eq, Show, Ord)
+
+    newtype Name = Name String deriving (Eq, Show, Ord)
+
+    -- Deriving even more
+
+    newtype USD = USD {getMillis :: Integer} deriving (Eq, Ord, Show)
+
+    instance Num USD where
+        (USD a) + (USD b) = USD (a+b)
+        (USD a) * (USD b) = USD (a*b)
+        abs (USD a) = USD (abs a)
+        signum (USD a) = USD (signum a)
+        fromInteger = USD
+        negate (USD a) = USD (negate a)
+
+    instance Real USD where
+        toRational(USD a) = toRational a
+
+    instance Enum USD where
+        toEnum a = USD (toEnum a)
+        fromEnum (USA a) = fromEnum a
+
+    {- instance Integral USD where
+        quotRem (USA a) (USD b) = 
+            let (a', b') quotRem a b 
+            in (USD a', USD b') 
+        toInteger (USD a) = a -}
+                            
