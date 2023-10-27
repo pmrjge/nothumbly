@@ -59,7 +59,7 @@ library
     import:           warnings
 
     -- Modules exported by the library.
-    exposed-modules:  MyLib Constructors.Smart
+    exposed-modules:  MyLib Constructors.Smart TypeClasses.AdHocPolymorphism
 
     -- Modules included in this library but not exported.
     -- other-modules:
